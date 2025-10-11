@@ -12,6 +12,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
                 <div className='h-16 content-center '>
                     <figure className='px-5'>
                         <Image
+                            loading='lazy'
                             src='/next.svg'
                             alt='app-logoo'
                             width={128}
