@@ -58,6 +58,8 @@ export async function POST(request: NextRequest) {
             path: '/',
         });
 
+        console.log(response.cookies.get(COOKIE_NAME));
+
         return response;
     } catch (error: any) {
         return NextResponse.json(error);
