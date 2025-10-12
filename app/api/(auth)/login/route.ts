@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         if (!isVerifiedPassword) {
             return NextResponse.json(
                 {
-                    error: "Email or password doesn't correspond",
+                    error: "Email or password doesn't match",
                 },
                 { headers, status: 401 }
             );
