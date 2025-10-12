@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
             },
         });
 
-        if (!user) {
+        if (!user?.id) {
             return NextResponse.json(
                 { error: 'User not found' },
                 { headers, status: 401 }
