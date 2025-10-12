@@ -13,7 +13,7 @@ import { RoutePaths } from '@/shared/configs/routes';
 import { useAuth } from '@/features/auth/ui/use-auth';
 
 const loginSchema = z.object({
-    email: z.email().min(1),
+    username: z.string().min(1),
     password: z.string().min(1),
 });
 
@@ -33,13 +33,11 @@ export default function SignInForm() {
     const handleSubmit = async (payload: any) => {
         setIsSubmitting(true);
 
-        const resp = await login(payload);
+        const resp = await login(payload).finally(() => setIsSubmitting(false));
 
-        setIsSubmitting(false);
-
-        // if (resp?.success) {
-        //     router.push(RoutePaths.TASKS);
-        // }
+        if (resp?.success) {
+            router.push(RoutePaths.USERS);
+        }
     };
 
     return (
@@ -56,12 +54,11 @@ export default function SignInForm() {
                         <div className='space-y-6'>
                             <div>
                                 <form.Field
-                                    name='email'
+                                    name='username'
                                     children={(field) => (
                                         <>
                                             <TextInput
-                                                type='email'
-                                                label='Email'
+                                                label='Username'
                                                 id={field.name}
                                                 name={field.name}
                                                 value={field.state.value}

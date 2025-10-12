@@ -1,10 +1,10 @@
 import { LoginDataType, RegisterDataType } from '@/features/auth/model';
-import { GET, POST } from '@/shared/api/fetch-adapters';
+import { GET, POST } from '@/shared/api/fetch';
 
 export const registerAction = async (payload: RegisterDataType) =>
-    POST('/api/register', payload);
+    POST('/users', payload);
 
 export const loginAction = async (payload: LoginDataType) =>
-    POST('/api/login', payload);
+    POST('/auth/login', payload);
 
 export const getProfileAction = async () => GET('/api/profile');

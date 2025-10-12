@@ -13,7 +13,7 @@ import { RoutePaths } from '@/shared/configs/routes';
 import { useAuth } from '@/features/auth/ui/use-auth';
 
 const registerSchema = z.object({
-    name: z.string().min(1),
+    username: z.string().min(1),
     email: z.email(),
     password: z.string().min(6),
 });
@@ -32,9 +32,9 @@ export default function SignUpForm() {
     const handleSubmit = async (payload: any) => {
         setIsSubmitting(true);
 
-        const resp = await register(payload);
-
-        setIsSubmitting(false);
+        const resp = await register(payload).finally(() =>
+            setIsSubmitting(false)
+        );
 
         if (resp?.success) {
             router.push(RoutePaths.SIGN_IN);
@@ -55,7 +55,7 @@ export default function SignUpForm() {
                         <div className='space-y-6'>
                             <div>
                                 <form.Field
-                                    name='name'
+                                    name='username'
                                     children={(field) => (
                                         <>
                                             <TextInput

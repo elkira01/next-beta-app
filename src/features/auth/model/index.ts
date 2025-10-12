@@ -3,14 +3,15 @@ export type AuthContextType = {
 };
 
 export type LoginDataType = {
-    email: string;
+    username: string;
     password: string;
 };
 
 export type RegisterDataType = {
-    name: string;
+    username: string;
     email: string;
     password: string;
+    avatar?: string;
 };
 
 export type UserSessionType = {
