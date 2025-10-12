@@ -51,14 +51,11 @@ export async function POST(request: NextRequest) {
 
         response.cookies.set(COOKIE_NAME, authToken, {
             httpOnly: true,
-            secure: false,
-            // secure: process.env.NODE_ENV === 'production',
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
             maxAge: COOKIE_MAX_AGE,
             path: '/',
         });
-
-        console.log(response.cookies.get(COOKIE_NAME));
 
         return response;
     } catch (error: any) {
