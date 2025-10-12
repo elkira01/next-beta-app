@@ -1,7 +1,7 @@
 import { prisma } from '../../_lib/prisma-client';
 import { NextRequest, NextResponse } from 'next/server';
 import { getCorsHeaders } from '../../_lib/http';
-import { hashPassword } from '@/shared/lib/security/hash';
+import { hashPassword } from '../../_lib/security';
 
 export async function POST(request: NextRequest) {
     const origin = request.headers.get('origin');
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
             data: { ...payload, password: hashedPassword },
         });
 
-        return NextResponse.json({ id: user?.id }, { headers });
+        return NextResponse.json({ id: user?.id }, { headers, status: 201 });
     } catch (error: any) {
         return NextResponse.json(error);
     }

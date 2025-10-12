@@ -2,40 +2,44 @@
 
 import { FormContainer } from '@/shared/ui/layouts/FormContainer';
 import { useForm } from '@tanstack/react-form';
-import React, { Fragment, useState } from 'react';
-import { registerAction } from '@/views/authentication/api/actions';
+import React, { useState } from 'react';
+import { loginAction, registerAction } from '@/features/auth/api';
 import { TextInput } from '@/shared/ui/forms/TextInput';
 import { z } from 'zod';
 import { parseZodError } from '@/shared/ui/forms/lib/validation-helpers';
 import { SpinnerCircularFixed } from 'spinners-react';
 import { useRouter } from 'next/navigation';
 import { RoutePaths } from '@/shared/configs/routes';
+import { useAuth } from '@/features/auth/ui/use-auth';
 
-const userSchema = z.object({
-    name: z.string().min(1),
-    email: z.email(),
-    password: z.string().min(6),
+const loginSchema = z.object({
+    email: z.email().min(1),
+    password: z.string().min(1),
 });
-export default function RegisterPage() {
+
+export default function SignInForm() {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const router = useRouter();
+    const { login } = useAuth();
+
     const form = useForm({
         defaultValues: {},
         validators: {
-            onChange: userSchema,
+            onChange: loginSchema,
         },
         onSubmit: async ({ value }) => await handleSubmit(value),
     });
 
     const handleSubmit = async (payload: any) => {
         setIsSubmitting(true);
-        const resp = await registerAction(payload).finally(() =>
-            setIsSubmitting(false)
-        );
 
-        if (resp?.id) {
-            router.push(RoutePaths.DASHBOARD);
-        }
+        const resp = await login(payload);
+
+        setIsSubmitting(false);
+
+        // if (resp?.success) {
+        //     router.push(RoutePaths.TASKS);
+        // }
     };
 
     return (
@@ -43,38 +47,13 @@ export default function RegisterPage() {
             <div className='mx-auto'>
                 <FormContainer title='Sign up'>
                     <form
-                        onSubmit={(e) => {
+                        onSubmit={(e: any) => {
                             e.preventDefault();
                             e.stopPropagation();
                             form.handleSubmit();
                         }}
                     >
                         <div className='space-y-6'>
-                            <div>
-                                <form.Field
-                                    name='name'
-                                    children={(field) => (
-                                        <>
-                                            <TextInput
-                                                label='User name'
-                                                id={field.name}
-                                                name={field.name}
-                                                value={field.state.value}
-                                                onBlur={field.handleBlur}
-                                                onChange={(e) =>
-                                                    field.handleChange(
-                                                        e.target.value
-                                                    )
-                                                }
-                                                errorMsg={parseZodError(
-                                                    field.state.meta.errors,
-                                                    field.name
-                                                )}
-                                            />
-                                        </>
-                                    )}
-                                />
-                            </div>
                             <div>
                                 <form.Field
                                     name='email'
@@ -87,7 +66,7 @@ export default function RegisterPage() {
                                                 name={field.name}
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
-                                                onChange={(e) =>
+                                                onChange={(e: any) =>
                                                     field.handleChange(
                                                         e.target.value
                                                     )
@@ -113,7 +92,7 @@ export default function RegisterPage() {
                                                 name={field.name}
                                                 value={field.state.value}
                                                 onBlur={field.handleBlur}
-                                                onChange={(e) =>
+                                                onChange={(e: any) =>
                                                     field.handleChange(
                                                         e.target.value
                                                     )
@@ -141,7 +120,7 @@ export default function RegisterPage() {
                                             secondaryColor='rgba(0, 0, 0, 0.44)'
                                         />
                                     )}
-                                    <span>Submit</span>
+                                    <span>Login</span>
                                 </button>
                             </div>
                         </div>

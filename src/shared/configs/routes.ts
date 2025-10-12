@@ -2,7 +2,10 @@ export const RoutePaths = {
     DASHBOARD: '/',
 
     USERS: '/users',
-    REGISTER_ACCOUNT: '/signup',
+
+    // Auth
+    SIGN_UP: '/sign-up',
+    SIGN_IN: '/sign-in',
 
     TASKS: '/tasks',
 };
