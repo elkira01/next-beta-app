@@ -4,7 +4,7 @@ import { FormContainer } from '@/shared/ui/layouts/FormContainer';
 import { useForm } from '@tanstack/react-form';
 import React, { useState } from 'react';
 import { loginAction, registerAction } from '@/features/auth/api';
-import { TextInput } from '@/shared/ui/forms/TextInput';
+import { TextInput } from '@/shared/ui/forms/ui/TextInput';
 import { z } from 'zod';
 import { parseZodError } from '@/shared/ui/forms/lib/validation-helpers';
 import { SpinnerCircularFixed } from 'spinners-react';

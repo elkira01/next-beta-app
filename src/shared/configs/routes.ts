@@ -7,5 +7,5 @@ export const RoutePaths = {
     SIGN_UP: '/sign-up',
     SIGN_IN: '/sign-in',
 
-    TASKS: '/tasks',
+    PRODUCTS: '/products',
 };

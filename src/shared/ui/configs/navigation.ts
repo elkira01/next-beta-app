@@ -10,11 +10,11 @@ export const appNavbarMenu: Array<AppMenuType> = [
         path: RoutePaths.DASHBOARD,
     },
     {
-        label: 'Users',
-        path: RoutePaths.USERS,
+        label: 'Products',
+        path: RoutePaths.PRODUCTS,
     },
     {
-        label: 'Task',
-        path: RoutePaths.TASKS,
+        label: 'Users',
+        path: RoutePaths.USERS,
     },
 ];
