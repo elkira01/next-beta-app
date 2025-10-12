@@ -6,8 +6,6 @@ import { Fragment, ReactNode } from 'react';
 export async function ProtectedRoute({ children }: { children: ReactNode }) {
     const session = await getSession();
 
-    console.log('AUTH SESSION', session);
-
     if (!session) {
         redirect(RoutePaths.SIGN_IN);
     }

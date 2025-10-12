@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
         }
 
         const authToken = await createToken({
-            userId: user.id,
+            id: user.id,
             email: user.email,
         });
 
@@ -51,7 +51,8 @@ export async function POST(request: NextRequest) {
 
         response.cookies.set(COOKIE_NAME, authToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: false,
+            // secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
             maxAge: COOKIE_MAX_AGE,
             path: '/',

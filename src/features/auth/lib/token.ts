@@ -1,7 +1,7 @@
 import { jwtVerify, SignJWT } from 'jose';
 import { PRIVATE_KEY } from '../config';
 
-export async function createToken(payload: { userId: string; email: string }) {
+export async function createToken(payload: { id: string; email: string }) {
     return await new SignJWT(payload)
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()

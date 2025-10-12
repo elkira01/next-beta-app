@@ -30,8 +30,6 @@ export async function POST(route: string, payload?: any) {
             body: JSON.stringify(payload ?? {}),
         });
 
-        console.log(response);
-
         if (response.ok) {
             return await response.json();
         }
