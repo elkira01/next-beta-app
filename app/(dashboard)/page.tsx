@@ -22,10 +22,10 @@ export default function AvatarUploadPage() {
 
                     const file = inputFileRef.current.files[0];
                     const formData = new FormData();
-                    formData.append('image', file);
+                    formData.append('file', file);
 
                     const response = await axios.post(
-                        `http://localhost:8000/api/upload-image`,
+                        `http://localhost:8000/api/upload-file`,
                         formData
                     );
 
@@ -37,8 +37,8 @@ export default function AvatarUploadPage() {
                     name='file'
                     ref={inputFileRef}
                     type='file'
-                    accept='image/jpeg, image/png, image/webp'
-                    // required
+                    accept='image/jpeg, image/png, image/webp, application/pdf'
+                    required
                 />
                 <button
                     type='submit'
