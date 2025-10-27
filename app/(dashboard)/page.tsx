@@ -21,27 +21,15 @@ export default function AvatarUploadPage() {
                     }
 
                     const file = inputFileRef.current.files[0];
+                    const formData = new FormData();
+                    formData.append('image', file);
 
-                    try {
-                        const response = await axios.post<PutBlobResult>(
-                            `http://localhost:8000/api/upload-image`,
-                            {
-                                body: file,
-                                // headers: {
-                                //     'Content-Type': 'image/jpeg',
-                                //     'Access-Control-Allow-Origin': '*',
-                                // },
-                            }
-                        );
+                    const response = await axios.post(
+                        `http://localhost:8000/api/upload-image`,
+                        formData
+                    );
 
-                        console.log(response.data.url);
-                    } catch (e) {
-                        console.error(e);
-                    }
-
-                    // const newBlob = (await response.json()) as PutBlobResult;
-                    //
-                    // setBlob(newBlob);
+                    setBlob(response.data);
                 }}
             >
                 <input
@@ -50,7 +38,7 @@ export default function AvatarUploadPage() {
                     ref={inputFileRef}
                     type='file'
                     accept='image/jpeg, image/png, image/webp'
-                    required
+                    // required
                 />
                 <button
                     type='submit'
