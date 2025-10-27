@@ -1,5 +1,5 @@
 import { LoginDataType, RegisterDataType } from '@/features/auth/model';
-import { GET, POST } from '@/shared/api/fetch';
+import { GET, POST } from '@/shared/api';
 
 export const registerAction = async (payload: RegisterDataType) =>
     POST('/users', payload);
